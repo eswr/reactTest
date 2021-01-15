@@ -64,22 +64,20 @@ const FileSystem = ({ directory, toggleExpand }) => {
 
   return (
     <ul className={classes.wrapper}>
-      {directory.map(d => (
-        <>
-          <li onClick={() => toggleExpand(d)}>
-            {d.type === 'folder' && (d.isOpen ? (
-              <span className={classes.icon}>+</span>
-            ) : (
-                <span className={classes.icon}>-</span>
-              )
-            )}
-            <span className={cx({ [classes.file]: d.type === 'file' })}>
-              {d.name}
-            </span>
-          </li>
-          {d.subDirectory && (d.isOpen && <FileSystem directory={d.subDirectory} toggleExpand={toggleExpand} />)}
-        </>
-      ))}
+      {directory.map(d => (<div key={d.path + '/' + d.name}>
+        <li onClick={() => toggleExpand(d)}>
+          {d.type === 'folder' && (d.isOpen ? (
+            <span className={classes.icon}>+</span>
+          ) : (
+              <span className={classes.icon}>-</span>
+            )
+          )}
+          <span className={cx({ [classes.file]: d.type === 'file' })}>
+            {d.name}
+          </span>
+        </li>
+        {d.subDirectory && (d.isOpen && <FileSystem directory={d.subDirectory} toggleExpand={toggleExpand} />)}
+      </div>))}
     </ul>
   )
 }
@@ -90,9 +88,7 @@ function Directory(props) {
   const matchPath = (i, d) => {
     let res = i.path + '/' + i.name === d.path + '/' + d.name
     if (!res && i.subDirectory) {
-      i.subDirectory.map(s => matchPath(s, d)).map(bol => {
-        if (bol) res = bol
-      })
+      res = i.subDirectory.map(s => matchPath(s, d)).find(bol => bol)
     }
     return res
   }
