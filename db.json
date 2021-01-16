@@ -1,0 +1,45 @@
+{
+  "directory": [
+    {
+      "path": ".",
+      "type": "folder",
+      "name": "src",
+      "isOpen": false,
+      "subDirectory": [
+        {
+          "path": "./src",
+          "type": "folder",
+          "name": "component",
+          "isOpen": false,
+          "subDirectory": [
+            {
+              "path": "./src/component",
+              "type": "folder",
+              "name": "component",
+              "isOpen": false
+  
+            }
+          ]
+        },
+        {
+          "path": "./src",
+          "type": "folder",
+          "name": "container",
+          "isOpen": false
+        },
+        {
+          "path": "./src",
+          "type": "file",
+          "name": "App.js",
+          "content": "kuch bhi but App.js"
+        }
+      ]
+    },
+    {
+      "path": ".",
+      "type": "file",
+      "name": "package.js",
+      "content": "kuch bhi"
+    }
+  ]
+}
