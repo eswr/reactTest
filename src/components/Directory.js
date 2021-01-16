@@ -82,23 +82,23 @@ const FileSystem = ({ directory, toggleExpand }) => {
   )
 }
 
-function Directory(props) {
+function Directory() {
   const [directory, setDirectory] = useState(defaultDirectory)
 
-  const matchPath = (i, d) => {
-    let res = i.path + '/' + i.name === d.path + '/' + d.name
-    if (!res && i.subDirectory) {
-      res = i.subDirectory.map(s => matchPath(s, d)).find(bol => bol)
-    }
-    return res
-  }
-  const toggleExpand = (d) => {
-    const newDirectory = directory.map(i => {
-      if (i.type === 'folder' && matchPath(i, d)) {
-        i.isOpen = !d.isOpen
+  const matchAndToggle = (dir, partialPath, d) => dir.map(i => {
+    if (i.name === partialPath[0]){
+      if (partialPath.length === 1){
+        i.isOpen =!d.isOpen
+      } else {
+        matchAndToggle(i.subDirectory,partialPath.splice(1),d)
       }
-      return i
-    })
+    }
+    return i
+  })
+  
+  const toggleExpand = (d) => {
+    const breadCrumbs = [...d.path.split('/'), d.name].splice(1)
+    const newDirectory = matchAndToggle(directory,breadCrumbs,d)
     setDirectory(newDirectory)
   }
 
