@@ -47,7 +47,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   contentPad: {
-    padding: [24, 16],
+    padding: "24px 16px",
     [theme.breakpoints.down('sm')]: {
       padding: ['8px'],
     },
